@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorSunsetOrange">#FF4E44</color>
+    <color name="colorRedOrange">#FF3B30</color>
+    <color name="colorShark">#1C1C1E</color>
+    <color name="colorGray">#F6F5F5</color>
+    <color name="colorAthensGray">#DFE3E8</color>
+    <color name="colorBaliHai">#919EAB</color>
+</resources>
