@@ -15,7 +15,7 @@ class AutoCompleteAdapter(
     itemsList: MutableList<DataItemCustomerResponse>
 ): ArrayAdapter<DataItemCustomerResponse>(context, 0, itemsList) {
 
-    private var itemsListFull: MutableList<DataItemCustomerResponse> = mutableListOf()
+    private var itemsListFull: MutableList<DataItemCustomerResponse> = itemsList
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(
@@ -48,48 +48,19 @@ class AutoCompleteAdapter(
         return view
     }
 
-    override fun getFilter(): Filter {
-        return nameFilter
+    override fun getCount(): Int {
+        return itemsListFull.size
     }
 
-    private val nameFilter: Filter = object : Filter() {
-
-        override fun performFiltering(constraint: CharSequence?): FilterResults {
-
-            val results = FilterResults()
-            val suggestions: MutableList<DataItemCustomerResponse> = mutableListOf()
-            if (constraint == null || constraint.length == 0) {
-                suggestions.addAll(itemsListFull)
-            } else {
-                val filterPatern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
-                for (item in itemsListFull) {
-                    item.name?.let {
-                        if (it.lowercase(Locale.getDefault()).contains(filterPatern)) {
-                            suggestions.add(item)
-                        }
-                    }
-                }
-            }
-            results.values = suggestions
-            results.count = suggestions.size
-            return results
-        }
-
-        override fun publishResults(
-            constraint: CharSequence?,
-            results: FilterResults
-        ) {
-            clear()
-            addAll(results.values as MutableList<DataItemCustomerResponse>)
-            notifyDataSetChanged()
-        }
-
-        override fun convertResultToString(resultValue: Any): CharSequence {
-            return (resultValue as DataItemCustomerResponse).name?:""
+    override fun getItem(position: Int): DataItemCustomerResponse? {
+        return if (position >= 0 && position < itemsListFull.size) {
+            itemsListFull[position]
+        } else {
+            null
         }
     }
 
-    init {
-        itemsListFull.addAll(itemsList)
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 }
