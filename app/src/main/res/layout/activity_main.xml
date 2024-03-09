@@ -7,7 +7,7 @@
     tools:context=".view.MainActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/container_til_name"
+        android:id="@+id/container_til_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Search"
@@ -41,8 +41,8 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@+id/container_til_name"
-        app:layout_constraintBottom_toBottomOf="@+id/container_til_name"
+        app:layout_constraintTop_toTopOf="@+id/container_til_search"
+        app:layout_constraintBottom_toBottomOf="@+id/container_til_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible"/>

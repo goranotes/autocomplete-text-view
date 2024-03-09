@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
                     timer.schedule(object : TimerTask() {
                         override fun run() {
                             if(!s.isNullOrBlank()){
-                                getDataCustomerList(s.toString())
+                                runOnUiThread {
+                                    getDataCustomerList(s.toString())
+                                }
                             }else{
                                 runOnUiThread {
                                     binding.pbSearch.visibility = View.GONE
@@ -81,12 +83,10 @@ class MainActivity : AppCompatActivity() {
         val filteredList = data.filter {
             it.name?.contains(keyword, ignoreCase = true) ?: false
         }
+
         itemsCustomerList.clear()
         itemsCustomerList.addAll(filteredList)
         adapterAutoComplete.notifyDataSetChanged()
-
-        runOnUiThread {
-            binding.pbSearch.visibility = View.GONE
-        }
+        binding.pbSearch.visibility = View.GONE
     }
 }
