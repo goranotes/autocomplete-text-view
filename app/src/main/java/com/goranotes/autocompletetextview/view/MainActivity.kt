@@ -69,6 +69,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.actvSearch.setOnItemClickListener { parent, _, position, _ ->
+            val selectedItem = parent.adapter.getItem(position) as DataItemCustomerResponse
+            binding.actvSearch.setText(selectedItem.name,false)
+            binding.actvSearch.clearFocus()
+        }
 
     }
 
