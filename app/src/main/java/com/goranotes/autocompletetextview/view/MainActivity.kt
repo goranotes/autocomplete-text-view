@@ -1,12 +1,13 @@
 package com.goranotes.autocompletetextview.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.goranotes.autocompletetextview.adapter.AutoCompleteAdapter
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         binding.actvSearch.setOnItemClickListener { parent, _, position, _ ->
             val selectedItem = parent.adapter.getItem(position) as DataItemCustomerResponse
             binding.actvSearch.setText(selectedItem.name,false)
+            hideKeyboard()
             binding.actvSearch.clearFocus()
         }
 
@@ -93,5 +95,10 @@ class MainActivity : AppCompatActivity() {
         itemsCustomerList.addAll(filteredList)
         adapterAutoComplete.notifyDataSetChanged()
         binding.pbSearch.visibility = View.GONE
+    }
+
+    fun Activity.hideKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }
